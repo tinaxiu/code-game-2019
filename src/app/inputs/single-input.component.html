@@ -1,0 +1,25 @@
+<div class="container">
+      <div class="col-sm">
+        <h2>single input: </h2>
+      </div>
+    
+      <div class="col-sm">
+        <form #inputForm="ngForm" (ngSubmit)="submit(inputForm.value)" autocomplete="off">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search Sessions" (ngModel)="input" name="input" id="input">
+          </div>
+          <div>
+            <button class="btn btn-default"  modal-trigger="searchResults">
+                Submit
+              </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+<simple-modal elementId="searchResults" onCloseBody="true" title="Matching Sessions">
+    <div class="list-group">
+        <li class="list-group-item" *ngFor="let session of foundSessions">SKU: {{foundSessions.SKU}}</li>
+    </div>
+</simple-modal>

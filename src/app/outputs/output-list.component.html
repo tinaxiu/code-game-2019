@@ -1,0 +1,21 @@
+<div class="container">
+    <div class = "row">
+        <div *ngFor="let event of events" class="col-md-5">
+            <event-thumbnail  [event]="event"></event-thumbnail>
+        </div>
+    </div>
+</div>
+
+<div>
+
+    <h1>SKU: {{res.SKU}}</h1>
+    <div>Percentage: {{res.percentage}}</div>
+    <div>Description: {{res.description}}</div>
+    <input type="checkbox" value="Bike">select<br>
+
+
+<simple-modal elementId="searchResults" onCloseBody = "false" title="Matching Sessions">
+    <div class="list-group">
+        <a class="list-group-item" *ngFor="let res of results" [routerLink]="['/events', session.eventId]">SKU: {{res.SKU}}</a>
+    </div>
+</simple-modal>
