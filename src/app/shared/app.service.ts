@@ -39,7 +39,6 @@ export class AppService {
         results = sessions.filter(session => session.Percentage > 79)
 
         var emitter = new EventEmitter(true)
-        console.log(emitter)
         setTimeout(()=>
         {
         emitter.emit(results)

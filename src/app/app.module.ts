@@ -12,6 +12,7 @@ import { SimpleModalComponent } from './inputs/simple-modal.component';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 import { NavBarComponent } from './nav/nav-bar.component';
+import { ModalTriggerDirective } from './inputs/modalTrigger.directive';
 let jQuery = window['$']
 
 @NgModule({
@@ -21,7 +22,8 @@ let jQuery = window['$']
     OutputListComponent,
     BatchInputComponent,
     SimpleModalComponent,
-    NavBarComponent
+    NavBarComponent,
+    ModalTriggerDirective
 
   ],
   imports: [
