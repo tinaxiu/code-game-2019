@@ -9,5 +9,6 @@ export interface ISession
     id: number
     SKU: number
     Percentage: number
-    isSelected: boolean
+    transactionYtpeCode: string //TYPE
+
 }

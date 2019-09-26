@@ -34,8 +34,9 @@ export class AppService {
     {
         
         var results: ISession[]  = []
-
-        results =  DATA.find(event => event.description = searchTerm).sessions
+        var sessions: ISession[]  = []
+        sessions =  DATA.find(event => event.description = searchTerm).sessions
+        results = sessions.filter(session => session.Percentage > 79)
 
         var emitter = new EventEmitter(true)
         console.log(emitter)
@@ -53,7 +54,7 @@ const DATA:IData[] = [
 
     {
         id : 1,
-        description: "something",
+        description: "s",
 
         sessions:
         [
@@ -61,8 +62,22 @@ const DATA:IData[] = [
                 id: 1,
                 SKU: 101,
                 Percentage: 80,
-                isSelected: false
+                transactionYtpeCode:"skdhfafa"
+            },
+
+            {
+                id: 1,
+                SKU: 102,
+                Percentage: 90,
+                transactionYtpeCode:"skdhfafa"
+            },
+            {
+                id: 1,
+                SKU: 102,
+                Percentage: 40,
+                transactionYtpeCode:"skdhfafa"
             }
+
         ]
     }
 

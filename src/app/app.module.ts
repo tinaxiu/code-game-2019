@@ -8,11 +8,10 @@ import { BatchInputComponent } from './inputs/batch-input-component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppService } from './shared/app.service';
 import { JQ_TOKEN } from "./shared/jQuery.service";
-import { SimpleModalComponent } from './simple-modal.component';
+import { SimpleModalComponent } from './inputs/simple-modal.component';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 import { NavBarComponent } from './nav/nav-bar.component';
-
 let jQuery = window['$']
 
 @NgModule({
