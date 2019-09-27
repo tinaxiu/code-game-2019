@@ -42,11 +42,11 @@ export class AppService {
         setTimeout(()=>
         {
         emitter.emit(results)
-        }, 1000)
-        return emitter
-
-        
+        }, 100)
+        return emitter        
     }
+
+
 }
 
 const DATA:IData[] = [
@@ -61,20 +61,23 @@ const DATA:IData[] = [
                 id: 1,
                 SKU: 101,
                 Percentage: 80,
-                transactionYtpeCode:"skdhfafa"
+                transactionYtpeCode:"skdhfafa",
+                isSelected : false
             },
 
             {
                 id: 1,
                 SKU: 102,
                 Percentage: 90,
-                transactionYtpeCode:"skdhfafa"
+                transactionYtpeCode:"skdhfafa",
+                isSelected : false
             },
             {
                 id: 1,
                 SKU: 102,
                 Percentage: 40,
-                transactionYtpeCode:"skdhfafa"
+                transactionYtpeCode:"skdhfafa",
+                isSelected : false
             }
 
         ]

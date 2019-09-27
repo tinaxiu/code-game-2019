@@ -20,7 +20,6 @@ export class SimpleModalComponent{
 
     closeModal()
     {
-      console.log(this.onCloseBody)
       if(this.onCloseBody.toLocaleLowerCase() === 'true')
         this.$(this.containerEl.nativeElement ).modal('hide')
     }

@@ -10,9 +10,42 @@
 
 </div>
 
-<simple-modal elementId="searchResults" onCloseBody="false" title="Matching Sessions">
-  <div class="list-group">
-      <a class="list-group-item" *ngFor="let session of foundSessions">SKU: {{session.SKU}}</a>
+<simple-modal elementId="searchResults" onCloseBody="false" title="Sessions matching the description:{{searchTerm}}">
+
+  <div class="container">
+    <div class="row" style="color: white; background-color: gray ">
+      <div class="col">
+          <h6>Select</h6>
+      </div>
+      <div class="col">
+        <h6>SKU</h6>
+      </div>
+      <div class="col">
+        <h6>transaction Type Code</h6>
+      </div>
+      <div class="col">
+        <h6>Percentage</h6>
+      </div>
+    </div>      
+    <div class="row" *ngFor="let session of foundSessions">
+      <div class="col" >
+        <input type="checkbox" [(ngModel)]="session.isSelected" (ngModelChange)="onSessionClick(session)"  required >
+      </div>
+      <div class="col" >
+        <h6 name="SKU" id="SKU">{{session.SKU}}</h6>
+      </div>
+      <div class="col">
+        <h6>{{session.transactionYtpeCode}}</h6>
+      </div>
+      <div class="col">
+        <h6>{{session.Percentage}}%</h6>
+      </div>
     </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-primary" (click)="submitSession()">Save changes</button>
+  </div> 
 </simple-modal>
 

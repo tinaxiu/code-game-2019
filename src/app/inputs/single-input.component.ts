@@ -1,29 +1,56 @@
-import { Component, OnInit } from "@angular/core";
-import { FormGroup } from '@angular/forms'
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { FormGroup, NgForm, FormControl } from '@angular/forms'
 import { AppService } from '../shared/app.service';
 import { ISession} from '../shared/app.modal';
 
 @Component({
     selector: 'single-input',
     templateUrl:'./single-input.component.html',
+    styles:[
+        `
+        .grid-title
+        {
+            background-color: gray 
+            color: white
+        }`
+    ]
 })
 
 export class SingleInputComponent implements OnInit{
-    inputForm: FormGroup
-    foundSessions: ISession[]
-
-    ngOnInit()
-    {
-
-    }
     constructor(private appService: AppService)
     {
 
     }
+
+    inputForm: FormGroup
+    foundSessions: ISession[]
+    selectedSession: ISession
+    isChecked: boolean = false;
+
+    
+
+    ngOnInit()
+    {
+
+
+    }
+
     submit(formValues)
     {
         this.appService.searchSessions(formValues).subscribe(
             sessions => this.foundSessions = sessions
         )
     }
+
+    onSessionClick(session : ISession) {
+        this.foundSessions.filter(s => s!=session).forEach( i => (i.isSelected= false))
+        this.selectedSession = session
+        
+    }
+
+    submitSession()
+    {
+        console.log(this.selectedSession)   
+    }
+
 }
