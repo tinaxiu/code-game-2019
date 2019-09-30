@@ -13,7 +13,6 @@ import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 import { NavBarComponent } from './nav/nav-bar.component';
 import { ModalTriggerDirective } from './inputs/modalTrigger.directive';
-import { BatchAccordings } from './inputs/batch-accordings.component';
 let jQuery = window['$']
 
 @NgModule({
@@ -25,8 +24,6 @@ let jQuery = window['$']
     SimpleModalComponent,
     NavBarComponent,
     ModalTriggerDirective,
-    BatchAccordings
-
   ],
   imports: [
     BrowserModule,

@@ -1,51 +1,50 @@
 import { Injectable, EventEmitter } from "@angular/core";
 import { Subject, Observable } from 'rxjs';
 import { IData, ISession} from './app.modal';
-import { forEach } from '@angular/router/src/utils/collection';
-
 @Injectable()
 export class AppService {
-    getEvents():Observable<IData[]>
-    {
-      let subject = new Subject<IData[]>()
-      // every 100mm add date from stream to subject
-      setTimeout(() => {subject.next(DATA); subject.complete(); },
-      100)
-      return subject
-    }
 
-    getEvent(id:number):IData{
-      return DATA.find(event => event.id === id)
-    }
+  getEvents():Observable<IData[]>
+  {
+    let subject = new Subject<IData[]>()
+    // every 100mm add date from stream to subject
+    setTimeout(() => {subject.next(DATA); subject.complete(); },
+    100)
+    return subject
+  }
 
-    saveEvent(event)
-    {
-      event.id = 999
-      event.session = []
-      DATA.push(event)
-    }
+  getEvent(id:number):IData{
+    return DATA.find(event => event.id === id)
+  }
 
-    updateEvent(event)
-    {
-      let index = DATA.findIndex(x => x.id = event.id)
-      DATA[index] = event
-    }
+  saveEvent(event)
+  {
+    event.id = 999
+    event.session = []
+    DATA.push(event)
+  }
 
-    searchSessions(searchTerm: string)
-    {
-        
-        var results: ISession[]  = []
-        var sessions: ISession[]  = []
-        sessions =  DATA.find(event => event.description === searchTerm).sessions
-        results = sessions.filter(session => session.Percentage > 79)
+  updateEvent(event)
+  {
+    let index = DATA.findIndex(x => x.id = event.id)
+    DATA[index] = event
+  }
 
-        var emitter = new EventEmitter(true)
-        setTimeout(()=>
-        {
-        emitter.emit(results)
-        }, 100)
-        return emitter        
-    }
+  searchSessions(searchTerm: string)
+  {
+      
+      var results: ISession[]  = []
+      var sessions: ISession[]  = []
+      sessions =  DATA.find(event => event.description === searchTerm).sessions
+      results = sessions.filter(session => session.Percentage > 79)
+
+      var emitter = new EventEmitter(true)
+      setTimeout(()=>
+      {
+      emitter.emit(results)
+      }, 0)
+      return emitter        
+  }
 
     searchData(searchTerm: string)
     {
@@ -59,6 +58,7 @@ export class AppService {
           results = results.concat(data)
       })
 
+
       var emitter = new EventEmitter(true)
       setTimeout(()=>
       {
@@ -67,7 +67,6 @@ export class AppService {
       return emitter   
 
     }
-
 
 }
 
