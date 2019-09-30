@@ -26,7 +26,7 @@ export class SingleInputComponent implements OnInit{
     foundSessions: ISession[]
     selectedSession: ISession
     isChecked: boolean = false;
-
+    searchTerm: string = ""
     
 
     ngOnInit()
@@ -40,6 +40,7 @@ export class SingleInputComponent implements OnInit{
         this.appService.searchSessions(formValues).subscribe(
             sessions => this.foundSessions = sessions
         )
+        this.searchTerm = ""
     }
 
     onSessionClick(session : ISession) {

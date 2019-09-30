@@ -2,7 +2,7 @@
 <div class="modal-body">
   <form id="searchForm" (ngSubmit)="submit(searchTerm)">
       <div class="form-group">
-          <label for="exampleInputEmail1">single input: </label>
+          <label for="basic-url">Single Input</label>
           <input type="text" class="form-control" placeholder="Enter Description" [(ngModel)]="searchTerm" name="input" id="input" >    
       </div>
       <button class="btn btn-primary"  modal-trigger="searchResults">Submit</button>
@@ -21,15 +21,16 @@
         <h6>SKU</h6>
       </div>
       <div class="col">
-        <h6>transaction Type Code</h6>
+        <h6>Transaction Type Code</h6>
       </div>
       <div class="col">
         <h6>Percentage</h6>
       </div>
-    </div>      
+    </div>
+    <div class="row" style="margin-bottom: 10px" ></div>      
     <div class="row" *ngFor="let session of foundSessions">
       <div class="col" >
-        <input type="checkbox" [(ngModel)]="session.isSelected" (ngModelChange)="onSessionClick(session)"  required >
+        <input type="checkbox" [(ngModel)]="session.isSelected" name="session.id" (ngModelChange)="onSessionClick(session)"  required style="width:20px;height: 20px;">
       </div>
       <div class="col" >
         <h6 name="SKU" id="SKU">{{session.SKU}}</h6>

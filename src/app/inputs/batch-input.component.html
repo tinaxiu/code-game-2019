@@ -1,17 +1,46 @@
-<div class="container">
-  <div class="col-sm">
-    <h2>batch input: </h2>
-  </div>
+<div class="modal-body">
+  <form id="filePath" (ngSubmit)="submitFile(searchTerms)">
 
-  <div class="input-group">
-      <form id="searchForm" >
-      <div class="custom-file">
-        <input type="file" class="custom-file-input" id="inputGroupFile02">
-        <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
-      </div>
-      <div class="input-group-append">
-        <span class="input-group-text" id="inputGroupFileAddon02">Upload</span>
-      </div>
-      </form>
-  </div>
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">batch Input</label>
+        <textarea style="width: 100%" class="form-control" id="inputs" name="inputs" rows="3" [(ngModel)]="searchTerms"></textarea>
+    </div>
+
+    <button class="btn btn-primary">Submit</button>
+  </form>
 </div>
+
+<batch-accordings elementId="searchResults" title="Matching Sessions">
+    <div class="row" style="margin-bottom: 30px" *ngFor="let foundData of dataItems" >
+        <div class="col-12 col-md-12 nopadding" style="background-color: gray; color: white;">
+          <div class="row nomargin min-width1000">
+            <div class="col-1 col-md-1 font-size20 font-color-blue min-width50 padding-top-left12">
+            </div>
+            <div class="col-11 col-md-11 nopadding text-left font-size13 font-color-white bg-gray padding10-0 min-width1350">
+              <div class="row nomargin">
+                  <div class="font-style-uppercase col-3 col-md-3 padding-left45 min-width180">ID: {{foundData.id}}</div>
+                <div class="font-style-uppercase col-3 col-md-3 padding-left45 min-width180">SKU</div>
+                <div class="font-style-uppercase col-1 col-md-3 min-width180">Transaction Type Code</div>
+                <div class="font-style-uppercase col-1 col-md-3 min-width180">Percentage</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+          <div class="col-12 col-md-12 nopadding" *ngFor="let item of foundData.sessions">   
+            <div class="row">               
+                <div class="col-3 col-md-3 min-width180" style="padding-left: 120px" ><input type="radio" name="{{foundData.id}}" [value]='item.SKU' style="width:20px;height: 20px;"></div>
+                <div class="col-3 col-md-3 min-width180"style="padding-left: 80px" >{{ item.SKU}}</div>
+                <div class="col-3 col-md-3 min-width180" style="padding-left: 120px">{{ item.transactionYtpeCode}}</div>
+                <div class="col-3 col-md-3 min-width180" style="padding-left: 80px">{{ item.Percentage}}</div>
+            </div>         
+
+      </div>
+      </div>
+
+      <div class="row" *ngIf="batchInputsubmitted" [(ngModel)]="batchInputsubmitted">
+        <button type="button" class="btn btn-secondary">Close</button>
+        <button type="submit" class="btn btn-primary" (click)="submitChanges()">Save changes</button>
+      </div> 
+
+</batch-accordings> 
