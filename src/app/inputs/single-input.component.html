@@ -11,7 +11,7 @@
 </div>
 
 <simple-modal elementId="searchResults" onCloseBody="false" title="Sessions matching the description:{{searchTerm}}">
-
+  <form id="resutltForm" >
   <div class="container">
     <div class="row" style="color: white; background-color: gray ">
       <div class="col">
@@ -28,9 +28,9 @@
       </div>
     </div>
     <div class="row" style="margin-bottom: 10px" ></div>      
-    <div class="row" *ngFor="let session of foundSessions">
+    <div class="row" *ngFor="let session of foundSessions" >
       <div class="col" >
-        <input type="checkbox" [(ngModel)]="session.isSelected" name="session.id" (ngModelChange)="onSessionClick(session)"  required style="width:20px;height: 20px;">
+        <input type="radio" name="same" id="session.SKU" (click)="onSessionClick(session.SKU)" required style="width:20px;height: 20px;">
       </div>
       <div class="col" >
         <h6 name="SKU" id="SKU">{{session.SKU}}</h6>
@@ -46,7 +46,8 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-primary" (click)="submitSession()">Save changes</button>
+    <button type="submit" class="btn btn-primary" >Save changes</button>
   </div> 
+</form>
 </simple-modal>
 

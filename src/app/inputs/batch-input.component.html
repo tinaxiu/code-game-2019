@@ -30,7 +30,7 @@
         
           <div class="col-12 col-md-12 nopadding" *ngFor="let item of foundData.sessions">   
             <div class="row">               
-                <div class="col-3 col-md-3 min-width180" style="padding-left: 120px" ><input type="radio" name="{{foundData.id}}" [value]='item.SKU' style="width:20px;height: 20px;"></div>
+                <div class="col-3 col-md-3 min-width180" style="padding-left: 120px" ><input type="radio" name="{{foundData.id}}" [value]='item.SKU' (click)="onSessionClick(item)" style="width:20px;height: 20px;"></div>
                 <div class="col-3 col-md-3 min-width180"style="padding-left: 80px" >{{ item.SKU}}</div>
                 <div class="col-3 col-md-3 min-width180" style="padding-left: 120px">{{ item.transactionYtpeCode}}</div>
                 <div class="col-3 col-md-3 min-width180" style="padding-left: 80px">{{ item.Percentage}}</div>

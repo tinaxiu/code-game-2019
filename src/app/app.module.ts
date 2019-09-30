@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 import { NavBarComponent } from './nav/nav-bar.component';
 import { ModalTriggerDirective } from './inputs/modalTrigger.directive';
+import { EventListResolver } from './inputs/data-items-resolver.service';
 let jQuery = window['$']
 
 @NgModule({
@@ -32,6 +33,7 @@ let jQuery = window['$']
   ],
   providers: [
     AppService,
+    EventListResolver,
     {provide: JQ_TOKEN, useValue:  jQuery},
     
   ],
