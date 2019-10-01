@@ -11,7 +11,7 @@
 </div>
 
 <simple-modal elementId="searchResults" onCloseBody="false" title="Sessions matching the description:{{searchTerm}}">
-  <form id="resutltForm" >
+  <form id="resutltForm" [formGroup]="selectedSessionForm" (ngSubmit)="saveSession(selectedSessionForm.value)"  >
   <div class="container">
     <div class="row" style="color: white; background-color: gray ">
       <div class="col">
@@ -28,24 +28,25 @@
       </div>
     </div>
     <div class="row" style="margin-bottom: 10px" ></div>      
-    <div class="row" *ngFor="let session of foundSessions" >
+    <div class="row" *ngFor="let session of foundSessions; let i = index;" >
       <div class="col" >
-        <input type="radio" name="same" id="session.SKU" (click)="onSessionClick(session.SKU)" required style="width:20px;height: 20px;">
+        <div class="form-group">
+          <input type="radio"  class="form-control" name="s" id="{{session.SKU}}"  [checked]="(i === 0)" value="{{session.SKU}}" formControlName="s" required style="width:20px;height: 20px;"> 
+        </div>
       </div>
       <div class="col" >
-        <h6 name="SKU" id="SKU">{{session.SKU}}</h6>
+        <h6 name="SKU" id="SKU" >{{session.SKU}}</h6>
       </div>
       <div class="col">
-        <h6>{{session.transactionYtpeCode}}</h6>
+        <h6 >{{session.transactionYtpeCode}}</h6>
       </div>
       <div class="col">
-        <h6>{{session.Percentage}}%</h6>
+        <h6 >{{session.Percentage}}%</h6>
       </div>
     </div>
 
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
     <button type="submit" class="btn btn-primary" >Save changes</button>
   </div> 
 </form>

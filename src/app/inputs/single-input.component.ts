@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { FormGroup, NgForm, FormControl, FormBuilder } from '@angular/forms'
 import { AppService } from '../shared/app.service';
 import { ISession} from '../shared/app.modal';
+import { runInThisContext } from 'vm';
 
 @Component({
     selector: 'single-input',
@@ -24,14 +25,20 @@ export class SingleInputComponent implements OnInit{
 
     inputForm: FormGroup
     foundSessions: ISession[]
-    selectedSession: ISession
-    isChecked: boolean = false;
+    selectedSessionForm: FormGroup
+    submittedSession: number
+    s: FormControl;
+
     searchTerm: string = ""
-    
+
 
     ngOnInit()
     {
-
+        this.s = new FormControl()
+        
+        this.selectedSessionForm = new FormGroup({
+            s: this.s
+        })
 
     }
 
@@ -40,10 +47,9 @@ export class SingleInputComponent implements OnInit{
         this.appService.searchSessions(formValues).subscribe(
             sessions => this.foundSessions = sessions
         )
-
+            
         this.searchTerm = ""
     }
-
 
     onSessionClick(session : number) {
         
@@ -51,9 +57,17 @@ export class SingleInputComponent implements OnInit{
         
     }
 
-    submitSession()
+    saveSession(formValues)
     {
+        if(formValues.s)
+        {
+           console.log(formValues.s) 
+           
+        }           
+        else
+            console.log(this.foundSessions[0].SKU)
         
     }
+
 
 }

@@ -14,6 +14,8 @@ import { appRoutes } from './routes';
 import { NavBarComponent } from './nav/nav-bar.component';
 import { ModalTriggerDirective } from './inputs/modalTrigger.directive';
 import { EventListResolver } from './inputs/data-items-resolver.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 let jQuery = window['$']
 
 @NgModule({
@@ -29,7 +31,9 @@ let jQuery = window['$']
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(appRoutes)
+    BrowserAnimationsModule,
+    RouterModule.forRoot(appRoutes),
+    ReactiveFormsModule
   ],
   providers: [
     AppService,

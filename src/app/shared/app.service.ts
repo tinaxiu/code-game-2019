@@ -1,6 +1,7 @@
 import { Injectable, EventEmitter } from "@angular/core";
 import { Subject, Observable } from 'rxjs';
 import { IData, ISession} from './app.modal';
+import { Session } from 'protractor';
 @Injectable()
 export class AppService {
 
@@ -37,12 +38,12 @@ export class AppService {
       var sessions: ISession[]  = []
       sessions =  DATA.find(event => event.description === searchTerm).sessions
       results = sessions.filter(session => session.Percentage > 79)
-
+      results.sort(sortByPercentage)
       var emitter = new EventEmitter(true)
       setTimeout(()=>
       {
       emitter.emit(results)
-      }, 0)
+      }, 10)
       return emitter        
   }
 
@@ -55,19 +56,36 @@ export class AppService {
 
       DATA.forEach(data => {
         if(terms.includes(data.description))
+          
           results = results.concat(data)
-      })
-
-
+        }
+      )
+      
+      results.forEach( result =>
+        {
+          var filterResults = result.sessions.filter(
+            session => session.Percentage > 79
+          )
+          filterResults.sort(sortByPercentage)
+          result.sessions = filterResults
+        })
+      
       var emitter = new EventEmitter(true)
       setTimeout(()=>
       {
       emitter.emit(results)
-      }, 100)
+      }, 10)
       return emitter   
 
     }
 
+}
+
+function sortByPercentage(p1: ISession, p2: ISession)
+{
+    if(p1.Percentage < p2.Percentage) return 1
+    else if(p1.Percentage === p2.Percentage) return 0
+    else return -1
 }
 
 const DATA:IData[] = [
@@ -112,7 +130,7 @@ const DATA:IData[] = [
           {
               id: 2,
               SKU: 201,
-              Percentage: 80,
+              Percentage: 90,
               transactionYtpeCode:"skdhfafa",
               isSelected : false
           },
@@ -120,14 +138,14 @@ const DATA:IData[] = [
           {
               id: 2,
               SKU: 202,
-              Percentage: 90,
+              Percentage: 88,
               transactionYtpeCode:"skdhfafa",
               isSelected : false
           },
           {
               id: 2,
               SKU: 203,
-              Percentage: 40,
+              Percentage: 98,
               transactionYtpeCode:"skdhfafa",
               isSelected : false
           }

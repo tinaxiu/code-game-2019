@@ -1,5 +1,5 @@
 <div class="modal-body">
-  <form id="filePath" (ngSubmit)="submitFile(searchTerms)" [(ngModel)]="batchInputsubmitted" name="buttons" ngDefaultControl>
+  <form id="filePath" (ngSubmit)="submitFile(searchTerms)"  name="buttons" ngDefaultControl>
 
     <div class="form-group">
         <label for="exampleFormControlTextarea1">batch Input</label>
@@ -12,32 +12,36 @@
 
 <div class="container" tabindex="-1" *ngIf="batchInputsubmitted">
     <div class="row"><h3>Matching Results: </h3></div>
-    <div class="row" style="margin-bottom: 30px" *ngFor="let foundData of dataItems" >
-        <div class="col-12 col-md-12 nopadding" style="background-color: gray; color: white;">
-          <div class="row nomargin min-width1000">
-            <div class="col-1 col-md-1 font-size20 font-color-blue min-width50 padding-top-left12">
-            </div>
-            <div class="col-11 col-md-11 nopadding text-left font-size13 font-color-white bg-gray padding10-0 min-width1350">
-              <div class="row nomargin">
-                  <div class="font-style-uppercase col-3 col-md-3 padding-left45 min-width180">ID: {{foundData.id}}</div>
-                <div class="font-style-uppercase col-3 col-md-3 padding-left45 min-width180">SKU</div>
-                <div class="font-style-uppercase col-1 col-md-3 min-width180">Transaction Type Code</div>
-                <div class="font-style-uppercase col-1 col-md-3 min-width180">Percentage</div>
+    <form id="resutltForm"  >
+      <div class="row" style="margin-bottom: 30px" *ngFor="let foundData of dataItems" >
+          <div class="col-12 col-md-12 nopadding" style="background-color: gray; color: white;">
+            <div class="row nomargin min-width1000">
+              <div class="col-1 col-md-1 font-size20 font-color-blue min-width50 padding-top-left12">
+              </div>
+              <div class="col-11 col-md-11 nopadding text-left font-size13 font-color-white bg-gray padding10-0 min-width1350">
+                <div class="row nomargin">
+                    <div class="font-style-uppercase col-3 col-md-3 padding-left45 min-width180">ID: {{foundData.id}}</div>
+                  <div class="font-style-uppercase col-3 col-md-3 padding-left45 min-width180">SKU</div>
+                  <div class="font-style-uppercase col-1 col-md-3 min-width180">Transaction Type Code</div>
+                  <div class="font-style-uppercase col-1 col-md-3 min-width180">Percentage</div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
         
-          <div class="col-12 col-md-12 nopadding" *ngFor="let item of foundData.sessions">   
-            <div class="row">               
-                <div class="col-3 col-md-3 min-width180" style="padding-left: 120px" ><input type="radio" name="{{foundData.id}}" [value]='item.SKU' (click)="onSessionClick(item)" style="width:20px;height: 20px;"></div>
-                <div class="col-3 col-md-3 min-width180"style="padding-left: 80px" >{{ item.SKU}}</div>
-                <div class="col-3 col-md-3 min-width180" style="padding-left: 120px">{{ item.transactionYtpeCode}}</div>
-                <div class="col-3 col-md-3 min-width180" style="padding-left: 80px">{{ item.Percentage}}</div>
+          <div class="col-12 col-md-12 nopadding" *ngFor="let item of foundData.sessions; let i = index;">   
+            <div class="row">      
+        
+                <div class="col-3 col-md-3 min-width180" style="padding-left: 120px" >
+                  <input class="form-control" type="radio" name="{{foundData.id}}" [checked]="i === 0" [value]='item' (click)="onSessionClick(item)" style="width:20px;height: 20px;"></div>
+              <div class="col-3 col-md-3 min-width180"style="padding-left: 80px" >{{ item.SKU}}</div>
+              <div class="col-3 col-md-3 min-width180" style="padding-left: 120px">{{ item.transactionYtpeCode}}</div>
+              <div class="col-3 col-md-3 min-width180" style="padding-left: 80px">{{ item.Percentage}}</div>
             </div>         
 
-      </div>
-      </div>
+          </div>
+        </div>
+      </form>
 
       <div class="row">
         <button type="button" class="btn btn-secondary" style="margin-right: 10px">Close</button>
