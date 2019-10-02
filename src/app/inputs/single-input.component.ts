@@ -1,8 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter, ViewChild, Input, AfterViewInit, ViewContainerRef, ElementRef } from "@angular/core";
 import { FormGroup, NgForm, FormControl, FormBuilder } from '@angular/forms'
 import { AppService } from '../shared/app.service';
 import { ISession} from '../shared/app.modal';
-import { runInThisContext } from 'vm';
+import { SearchComponent } from "../search.component";
 
 @Component({
     selector: 'single-input',
@@ -17,11 +17,7 @@ import { runInThisContext } from 'vm';
     ]
 })
 
-export class SingleInputComponent implements OnInit{
-    constructor(private appService: AppService)
-    {
-
-    }
+export class SingleInputComponent{
 
     inputForm: FormGroup
     foundSessions: ISession[]
@@ -31,26 +27,38 @@ export class SingleInputComponent implements OnInit{
 
     batchInputsubmitted: boolean = false
 
-    searchTerm: string = ""
+    @Input() searchTerms:string
 
-
-    ngOnInit()
+    constructor(private appService: AppService)
     {
+
+    }  
+
+    ngOnInit(){
         this.s = new FormControl()
         
         this.selectedSessionForm = new FormGroup({
             s: this.s
         })
 
-    }
-
-    submit(formValues)
-    {
-        this.appService.searchSessions(formValues).subscribe(
+        console.log("load")
+        this.appService.searchSessions(this.searchTerms).subscribe(
             sessions => this.foundSessions = sessions
         )
             
-        this.searchTerm = ""
+        this.searchTerms = ""
+        this.batchInputsubmitted = true 
+
+    }
+
+    onInitialSeach()
+    {
+        console.log("load")
+        this.appService.searchSessions(this.searchTerms).subscribe(
+            sessions => this.foundSessions = sessions
+        )
+            
+        this.searchTerms = ""
         this.batchInputsubmitted = true 
     }
 

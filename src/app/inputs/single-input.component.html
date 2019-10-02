@@ -1,17 +1,5 @@
-
-<div class="modal-body">
-  <form id="searchForm" (ngSubmit)="submit(searchTerm)">
-      <div class="form-group col-4">
-          <label for="basic-url">Single Input</label>
-          <input type="text" class="form-control" placeholder="Enter Description" [(ngModel)]="searchTerm" name="input" id="input" > 
-          <button class="btn btn-primary" style="margin-top: 10px" modal-trigger="searchResults">Submit</button>   
-      </div>
-      
-  </form>
-
-</div>
-
 <div class="container" tabindex="-1" *ngIf="batchInputsubmitted">
+  <button type="button" (click)="onInitialSeach()">Refresh</button>
   <form id="resutltForm" [formGroup]="selectedSessionForm" (ngSubmit)="saveSession(selectedSessionForm.value)"  >
   <div class="container">
     <div class="row" style="color: white; background-color: gray ">

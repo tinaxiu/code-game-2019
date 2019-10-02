@@ -1,15 +1,3 @@
-<div class="modal-body col-4">
-  <form id="filePath" (ngSubmit)="submitFile(searchTerms)"  name="buttons" ngDefaultControl>
-
-    <div class="form-group">
-        <label for="exampleFormControlTextarea1">batch Input</label>
-        <textarea style="width: 100%" class="form-control" id="inputs" name="inputs" rows="3" [(ngModel)]="searchTerms"></textarea>
-    </div>
-
-    <button class="btn btn-primary">Submit</button>
-  </form>
-</div>
-
 <div class="container" tabindex="-1" *ngIf="batchInputsubmitted">
     <div class="row"><h3>Matching Results: </h3></div>
     <form id="resutltForm"  >
@@ -34,9 +22,9 @@
         
                 <div class="col-3 col-md-3 min-width180" style="padding-left: 120px" >
                   <input class="form-control" type="radio" name="{{foundData.id}}" [checked]="i === 0" [value]='item' (click)="onSessionClick(item)" style="width:20px;height: 20px;"></div>
-              <div class="col-3 col-md-3 min-width180"style="padding-left: 80px" >{{ item.SKU}}</div>
+              <div class="col-3 col-md-3 min-width180"style="padding-left: 80px;" >{{ item.SKU}}</div>
               <div class="col-3 col-md-3 min-width180" style="padding-left: 120px">{{ item.transactionYtpeCode}}</div>
-              <div class="col-3 col-md-3 min-width180" style="padding-left: 80px">{{ item.Percentage}}</div>
+              <div class="col-3 col-md-3 min-width180" style="padding-left: 80px">{{ item.Percentage}}%</div>
             </div>         
 
           </div>

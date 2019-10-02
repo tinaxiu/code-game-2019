@@ -1,4 +1,7 @@
-import { Component } from "@angular/core";
+import { Component, Output, EventEmitter, AfterViewInit, ViewChild, Input } from "@angular/core";
+import { SingleInputComponent } from './inputs/single-input.component';
+import { AppService } from './shared/app.service';
+import { ISession, IData } from './shared/app.modal';
 
 @Component({
     selector:'search',
@@ -37,5 +40,57 @@ import { Component } from "@angular/core";
 
 export class SearchComponent
 {
+
+    searchType: boolean
+    public searchTerm: string = "s"
+
+    searchsubmitted: boolean
+
+    singleSearchResults: ISession[] = []
+    batchSearchResults: IData[] = []
+   
+
+    ngOnInit(): void {
+        //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+        //Add 'implements OnInit' to the class.
+        this.searchType = true
+        this.searchsubmitted = false
+    }
+
+    constructor(private appService: AppService)
+    {
+        this.searchTerm = ""
+    }   
+
+    
+    getName(str: string)
+    {
+        if(str === "single")
+            this.searchType = true
+
+        else 
+            this.searchType = false
+
+    }
+
+    @Input() name: string;
+    
+
+    suggestSubmit(formValue){
+        console.log(formValue)
+        if(this.searchType)
+        {
+            this.searchTerm = formValue
+        }
+        else
+        {
+            //waiting for the data
+            this.searchTerm = formValue
+        }
+
+        this.searchsubmitted = true
+
+        
+    }
 
 }
