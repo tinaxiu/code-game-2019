@@ -1,14 +1,33 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" style="height: 100%">
 <head>
   <meta charset="utf-8">
   <title>DemoTina</title>
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/x-icon" href="./assets/images/favicon.png">
 </head>
-<body>
-  <app-root></app-root>
+<body style="height: 100%">
+  <div class="row">
+    <div class="col-md-6">
+      <a href="/">
+          <img src="./assets/images/wk_logo.png" style="width: 194px">
+      </a>      
+    </div>
+  </div>
+  <div style="min-height: 100%; position: relative;">
+    <app-root></app-root>
+  </div>
+  <footer style="width: 100%;bottom: 0;position: absolute;">
+      <div class="row" style="background-color: #757575">
+          <div class="col-md-6">
+            <img src="./assets/images/wk_logo.png" style="width: 194px">
+          </div>
+        </div>
+  </footer>    
+  
 </body>
+
+
 </html>
