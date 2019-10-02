@@ -29,6 +29,8 @@ export class SingleInputComponent implements OnInit{
     submittedSession: number
     s: FormControl;
 
+    batchInputsubmitted: boolean = false
+
     searchTerm: string = ""
 
 
@@ -49,6 +51,7 @@ export class SingleInputComponent implements OnInit{
         )
             
         this.searchTerm = ""
+        this.batchInputsubmitted = true 
     }
 
     onSessionClick(session : number) {
@@ -66,7 +69,7 @@ export class SingleInputComponent implements OnInit{
         }           
         else
             console.log(this.foundSessions[0].SKU)
-        
+            this.batchInputsubmitted = false
     }
 
 

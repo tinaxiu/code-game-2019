@@ -11,7 +11,7 @@
 
 </div>
 
-<simple-modal elementId="searchResults" onCloseBody="false" title="Sessions matching the description:{{searchTerm}}">
+<div class="container" tabindex="-1" *ngIf="batchInputsubmitted">
   <form id="resutltForm" [formGroup]="selectedSessionForm" (ngSubmit)="saveSession(selectedSessionForm.value)"  >
   <div class="container">
     <div class="row" style="color: white; background-color: gray ">
@@ -51,5 +51,5 @@
     <button type="submit" class="btn btn-primary" >Save changes</button>
   </div> 
 </form>
-</simple-modal>
+</div>
 

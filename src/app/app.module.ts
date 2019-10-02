@@ -8,15 +8,14 @@ import { BatchInputComponent } from './inputs/batch-input-component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppService } from './shared/app.service';
 import { JQ_TOKEN } from "./shared/jQuery.service";
-import { SimpleModalComponent } from './inputs/simple-modal.component';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 import { NavBarComponent } from './nav/nav-bar.component';
-import { ModalTriggerDirective } from './inputs/modalTrigger.directive';
 import { EventListResolver } from './inputs/data-items-resolver.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SearchComponent } from "./search.component";
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
-let jQuery = window['$']
 
 @NgModule({
   declarations: [
@@ -24,21 +23,20 @@ let jQuery = window['$']
     SingleInputComponent,
     OutputListComponent,
     BatchInputComponent,
-    SimpleModalComponent,
     NavBarComponent,
-    ModalTriggerDirective,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [
     AppService,
-    EventListResolver,
-    {provide: JQ_TOKEN, useValue:  jQuery},
+    EventListResolver
     
   ],
   bootstrap: [AppComponent]
