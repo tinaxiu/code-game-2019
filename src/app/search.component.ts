@@ -2,6 +2,7 @@ import { Component, Output, EventEmitter, AfterViewInit, ViewChild, Input } from
 import { SingleInputComponent } from './inputs/single-input.component';
 import { AppService } from './shared/app.service';
 import { ISession, IData } from './shared/app.modal';
+import {Router} from "@angular/router";
 
 @Component({
     selector:'search',
@@ -57,7 +58,7 @@ export class SearchComponent
         this.searchsubmitted = false
     }
 
-    constructor(private appService: AppService)
+    constructor(private appService: AppService,private router : Router)
     {
         this.searchTerm = ""
     }   
@@ -88,6 +89,10 @@ export class SearchComponent
         if(this.searchType)
         {
             this.searchTerm = formValue
+            this.appService.searchTerms = formValue
+            this.router.navigate(['/singleInput'])
+            
+            
         }
         else
         {

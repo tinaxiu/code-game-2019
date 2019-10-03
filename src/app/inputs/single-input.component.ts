@@ -25,28 +25,32 @@ export class SingleInputComponent{
     submittedSession: number
     s: FormControl;
 
-    batchInputsubmitted: boolean = false
+    batchInputsubmitted: boolean = true
 
     @Input() searchTerms:string
 
     constructor(private appService: AppService)
     {
+        this.search()
     }  
 
-    async ngOnInit(){
+     ngOnInit(){
         this.s = new FormControl()
         
         this.selectedSessionForm = new FormGroup({
             s: this.s
-        })            
-        if(this.searchTerms)
-        {
-            this.foundSessions = await this.appService.getResults(this.searchTerms)
-            this.batchInputsubmitted = true
-        }
-            
-        else
-            this.batchInputsubmitted = false 
+        })    
+        
+        this.search()
+
+    }
+
+
+    async search()
+    {
+        console.log("single seatch", this.searchTerms)
+
+        this.foundSessions = await this.appService.getResults(this.searchTerms)
     }
 
     onSessionClick(session : number) {

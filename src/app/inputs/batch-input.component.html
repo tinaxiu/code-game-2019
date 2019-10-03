@@ -9,8 +9,8 @@
               <div class="col-11 col-md-11 nopadding text-left font-size13 font-color-white bg-gray padding10-0 min-width1350">
                 <div class="row nomargin">
                     <div class="font-style-uppercase col-3 col-md-3 padding-left45 min-width180">ID: {{foundData.id}}</div>
-                  <div class="font-style-uppercase col-3 col-md-3 padding-left45 min-width180">SKU</div>
-                  <div class="font-style-uppercase col-1 col-md-3 min-width180">Transaction Type Code</div>
+                  <div class="font-style-uppercase col-3 col-md-3 padding-left45 min-width180">transaction Type Code</div>
+                  <div class="font-style-uppercase col-1 col-md-3 min-width180">description</div>
                   <div class="font-style-uppercase col-1 col-md-3 min-width180">Percentage</div>
                 </div>
               </div>
@@ -22,9 +22,9 @@
         
                 <div class="col-3 col-md-3 min-width180" style="padding-left: 120px" >
                   <input class="form-control" type="radio" name="{{foundData.id}}" [checked]="i === 0" [value]='item' (click)="onSessionClick(item)" style="width:20px;height: 20px;"></div>
-              <div class="col-3 col-md-3 min-width180"style="padding-left: 80px;" >{{ item.SKU}}</div>
-              <div class="col-3 col-md-3 min-width180" style="padding-left: 120px">{{ item.transactionYtpeCode}}</div>
-              <div class="col-3 col-md-3 min-width180" style="padding-left: 80px">{{ item.Percentage}}%</div>
+              <div class="col-3 col-md-3 min-width180"style="padding-left: 80px;" >{{ item.transactionTypeCode}}</div>
+              <div class="col-3 col-md-3 min-width180" style="padding-left: 120px">{{ item.description}}</div>
+              <div class="col-3 col-md-3 min-width180" style="padding-left: 80px">{{ item.percentMatch*10}}%</div>
             </div>         
 
           </div>

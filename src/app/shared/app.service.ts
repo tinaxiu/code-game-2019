@@ -9,7 +9,7 @@ export class AppService {
 
   apiURL = 'http://localhost:31326/api/calcscore/short/';
 
-  searchTerms: string[]
+  public searchTerms: string
   private handleError: HandleError;
   private headers: HttpHeaders;
   response: ISession[] = []
@@ -18,12 +18,12 @@ export class AppService {
   constructor(private http: HttpClient) {
     
     this.headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
-    
+
   }
 
   async getResults(searchTerm: string) {
     console.log("getResults")
-    this.response =  await this.http.get<ISession[]>(this.apiURL+ searchTerm, {headers: this.headers}).toPromise();
+    this.response =  await this.http.get<ISession[]>(this.apiURL+ this.searchTerms, {headers: this.headers}).toPromise();
     return this.response
 
   }
