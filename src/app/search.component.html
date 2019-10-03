@@ -1,7 +1,7 @@
 <div class="myfont" style="background-color: #F5F5F5; padding-top: 20px; width:90%; margin-right: 70px; margin-left: 70px">
-        
+        <form id="searchForm" (ngSubmit)="suggestSubmit(searchTerm)" >
     <div class="row"></div>
-    <div class="row" style="background-color: #fff; padding: 20px 15px 20px 0">
+    <div class="form-row" style="background-color: #fff; padding: 20px 15px 20px 0">
         <div class="col-3 mb-2">
             <div class="form-group">
                 <label for="searchBox">Type</label>
@@ -13,9 +13,7 @@
                         </div>
                     </div>
             </div>
-              
-        </div>
-    
+            </div>  
         
         <div class="col-6 mb-2">
             
@@ -26,26 +24,20 @@
                 </div>  
             
         </div>
-        
+
         <div class="col-1 mb-2">
-                <form id="searchForm" (ngSubmit)="suggestSubmit(searchTerm)" >
                 <label for="searchBox" style="color:white">Suggest</label>
-            <button class="btn btn-primary" type="submit" style="width: 100%;  border-color: #dadada"  rows="1" >Suggest</button>
-        </form>
+            <button class="btn btn-primary" type="submit" style="width: 100%;  border-color: #dadada"  rows="1" >Suggest</button></div>
         </div>
-    
 
-    <div class="row">
-            <single-input searchTerms="{{searchTerm}}" *ngIf="searchType" elementId="singleSearchResults">
 
-                </single-input>
-    </div>
-    
+    <single-input searchTerms="{{searchTerm}}" *ngIf="searchType" elementId="singleSearchResults">
+
+    </single-input>
 
     
     <batch-input searchTerms="{{searchTerm}}" *ngIf="!searchType && searchsubmitted" ></batch-input>
+</form>
 
 </div>
-</div>
-
 

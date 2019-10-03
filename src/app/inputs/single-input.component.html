@@ -1,5 +1,5 @@
 
-<div id="{{elementId}}" class="container" tabindex="-1" *ngIf="batchInputsubmitted">
+<div id="{{elementId}}" class="container" tabindex="-1" *ngIf="batchInputsubmitted" style="background-color: white">
   <form id="resutltForm" [formGroup]="selectedSessionForm" (ngSubmit)="saveSession(selectedSessionForm.value)"  >
   <div class="container">
     <div class="row" style="color: white; background-color: gray ">
