@@ -26,8 +26,6 @@ export class SingleInputComponent{
     s: FormControl;
 
     batchInputsubmitted: boolean = false
-    public currentJogging: any;
-    public joggingData: Array<any>;
 
     @Input() searchTerms:string
 
@@ -35,30 +33,20 @@ export class SingleInputComponent{
     {
     }  
 
-    ngOnInit(){
+    async ngOnInit(){
         this.s = new FormControl()
         
         this.selectedSessionForm = new FormGroup({
             s: this.s
         })            
         if(this.searchTerms)
-            this.onInitialSeach()
+        {
+            this.foundSessions = await this.appService.getResults(this.searchTerms)
+            this.batchInputsubmitted = true
+        }
+            
         else
             this.batchInputsubmitted = false 
-    }
-
-    onInitialSeach()
-    {
-        this.appService.searchSessions(this.searchTerms).subscribe((data: any) => this.foundSessions = data);           
-
-        this.batchInputsubmitted = true 
-    }
-
-    onInitialSeach2()
-    {
-        this.appService.getResults(this.searchTerms).subscribe((data: any) => this.joggingData = data);           
-        this.searchTerms = ""
-        this.batchInputsubmitted = true 
     }
 
     onSessionClick(session : number) {
@@ -69,18 +57,10 @@ export class SingleInputComponent{
 
     saveSession(formValues)
     {
-        if(formValues.s)
-        {
-           console.log(formValues.s) 
-           
-        }           
-        else
-            console.log(this.foundSessions[0].SKU)
-            this.batchInputsubmitted = false
-        
-        this.selectedSessionForm.reset()
-        this.ngOnInit()
-        }
+        this.batchInputsubmitted = false 
+        this.searchTerms = ""
+    }
+
 
 
 }

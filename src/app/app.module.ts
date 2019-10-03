@@ -18,6 +18,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpErrorHandler } from './shared/error-handler.service';
 import { MessageService } from './shared/message.service';
+import { UploadService } from './shared/upload.service';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { MessageService } from './shared/message.service';
   providers: [
     AppService,
     EventListResolver,
-    HttpErrorHandler,MessageService
+    HttpErrorHandler,MessageService,
+    UploadService
     
   ],
   bootstrap: [AppComponent]

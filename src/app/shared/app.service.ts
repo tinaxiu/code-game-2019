@@ -7,11 +7,13 @@ import { catchError } from 'rxjs/operators';
 @Injectable()
 export class AppService {
 
-  apiURL = 'localhost:31326/api/calcscore/';
+  apiURL = 'http://localhost:31326/api/calcscore/short/';
 
   searchTerms: string[]
   private handleError: HandleError;
   private headers: HttpHeaders;
+  response: ISession[] = []
+  responses: IData[] = []
 
   constructor(private http: HttpClient) {
     
@@ -19,156 +21,39 @@ export class AppService {
     
   }
 
+  async getResults(searchTerm: string) {
+    console.log("getResults")
+    this.response =  await this.http.get<ISession[]>(this.apiURL+ searchTerm, {headers: this.headers}).toPromise();
+    return this.response
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'text/html'
-    })
-  }  
-
-  getResults(searchTerm: string) {
-    return this.http.get("localhost:31326/api/calcscore/brown dog/red fox,hello world", {headers: this.headers});
   }
 
-  putResult(searchTerm): Observable<ISession> {
-    return this.http.put<ISession>(this.apiURL,searchTerm, this.httpOptions)
-    .pipe(
-    )
-  }
-
-  getEvents():Observable<IData[]>
+  getEvents():Observable<ISession[]>
   {
-    let subject = new Subject<IData[]>()
+    let subject = new Subject<ISession[]>()
     // every 100mm add date from stream to subject
-    setTimeout(() => {subject.next(DATA); subject.complete(); },
+    setTimeout(() => {subject.next(this.response); subject.complete(); },
     100)
     return subject
   }
 
-  searchSessions(searchTerm: string)
+  async searchData(searchTerm: string)
   {
-      
-      var results: ISession[]  = []
-      var sessions: ISession[]  = []
-      sessions =  DATA.find(event => event.description === searchTerm).sessions
-      results = sessions.filter(session => session.Percentage > 79)
-      results.sort(sortByPercentage)
-      var emitter = new EventEmitter(true)
-      setTimeout(()=>
-      {
-      emitter.emit(results)
-      }, 10)
-      return emitter        
+    console.log("searchData")
+
+    this.responses =  await this.http.post<IData[]>(this.apiURL, searchTerm, {headers: this.headers}).toPromise();
+    return this.responses
+
+
   }
-
-    searchData(searchTerm: string)
-    {
-      var results: IData[]  = []
-      var dataItems: IData[]  = []
-      var terms: string[]
-      terms = searchTerm.split(',')
-
-      DATA.forEach(data => {
-        if(terms.includes(data.description))
-          
-          results = results.concat(data)
-        }
-      )
-      
-      results.forEach( result =>
-        {
-          var filterResults = result.sessions.filter(
-            session => session.Percentage > 79
-          )
-          filterResults.sort(sortByPercentage)
-          result.sessions = filterResults
-        })
-      
-      var emitter = new EventEmitter(true)
-      setTimeout(()=>
-      {
-      emitter.emit(results)
-      }, 10)
-      return emitter   
-
-    }
 
 }
 
 function sortByPercentage(p1: ISession, p2: ISession)
 {
-    if(p1.Percentage < p2.Percentage) return 1
-    else if(p1.Percentage === p2.Percentage) return 0
+    if(p1.percentMatch < p2.percentMatch) return 1
+    else if(p1.percentMatch === p2.percentMatch) return 0
     else return -1
 }
-
-const DATA:IData[] = [
-
-    {
-        id : 1,
-        description: "s",
-
-        sessions:
-        [
-            {
-                id: 1,
-                SKU: 101,
-                Percentage: 80,
-                transactionYtpeCode:"skdhfafa",
-                isSelected : false
-            },
-
-            {
-                id: 1,
-                SKU: 102,
-                Percentage: 90,
-                transactionYtpeCode:"skdhfafa",
-                isSelected : false
-            },
-            {
-                id: 1,
-                SKU: 103,
-                Percentage: 40,
-                transactionYtpeCode:"skdhfafa",
-                isSelected : false
-            }
-
-        ]
-    },
-    {
-      id : 2,
-      description: "d",
-
-      sessions:
-      [
-          {
-              id: 2,
-              SKU: 201,
-              Percentage: 90,
-              transactionYtpeCode:"skdhfafa",
-              isSelected : false
-          },
-
-          {
-              id: 2,
-              SKU: 202,
-              Percentage: 88,
-              transactionYtpeCode:"skdhfafa",
-              isSelected : false
-          },
-          {
-              id: 2,
-              SKU: 203,
-              Percentage: 98,
-              transactionYtpeCode:"skdhfafa",
-              isSelected : false
-          }
-
-      ]
-  }
-
-    
-    
-]
 
 

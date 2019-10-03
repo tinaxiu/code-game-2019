@@ -3,6 +3,7 @@ import { AppService } from '../shared/app.service';
 import { ISession, IData} from '../shared/app.modal';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Session } from 'protractor';
+import { UploadService } from '../shared/upload.service';
 
 
 @Component({
@@ -24,24 +25,29 @@ export class BatchInputComponent {
     //searchTerms : string = "s,d"
     submittedDataItems: ISession[] = []
 
-    @Input() searchTerms:string
+    @Input() searchTerms:File
     
-    constructor(private appService: AppService)
+    constructor(private appService: AppService, private upload:UploadService)
     {
 
     }
-    ngOnInit(): void {
+    async ngOnInit() {
+
+
+        if(this.searchTerms)
+        {
+            this.dataItems = await this.upload.upload(this.searchTerms)
+            this.batchInputsubmitted = true
+        }
+            
+        else
+            this.batchInputsubmitted = false 
+
+        
     }
 
     submitFile(formValues)
     {
-        this.appService.searchData(formValues).subscribe(
-            dataItem => this.dataItems = dataItem
-            
-            
-        )
-        this.searchTerms= ""
-        this.batchInputsubmitted = true 
     }
 
     submitChanges()
@@ -56,7 +62,7 @@ export class BatchInputComponent {
 
             this.submittedDataItems.forEach( item =>
                 {
-                    let index = this.resultsData.findIndex(d => d.id === item.id)
+                    let index = this.resultsData.findIndex(d => d.transactionTypeCode === item.transactionTypeCode)
                     if(index>-1)
                     {
                         item = this.resultsData[index]
@@ -74,9 +80,9 @@ export class BatchInputComponent {
 
     onSessionClick(session: ISession)
     {
-        if(this.resultsData.find(s => s.id === session.id))
+        if(this.resultsData.find(s => s.transactionTypeCode === session.transactionTypeCode))
         {
-            let index = this.resultsData.findIndex(s => s.id === session.id)
+            let index = this.resultsData.findIndex(s => s.transactionTypeCode === session.transactionTypeCode)
             this.resultsData[index] = session           
         }
         else{

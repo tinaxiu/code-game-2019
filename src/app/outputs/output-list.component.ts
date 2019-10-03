@@ -18,8 +18,5 @@ export class OutputListComponent {
 
     searchSessions(searchTerm)
     {
-        this.appService.searchSessions(searchTerm).subscribe(
-            sessions => this.foundSessions = sessions           
-        )
     }
 }

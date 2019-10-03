@@ -43,7 +43,7 @@ export class SearchComponent
 
     searchType: boolean
     searchTerm: string = "s"
-
+    searchName: string = "single input"
     searchsubmitted: boolean
 
     singleSearchResults: ISession[] = []
@@ -66,10 +66,18 @@ export class SearchComponent
     getName(str: string)
     {
         if(str === "single")
+        {
+            this.searchName = "Single Input"
             this.searchType = true
+        }
+            
 
         else 
+        {
+            this.searchName = "Batch Input"
             this.searchType = false
+        }
+            
 
     }
 
@@ -80,16 +88,14 @@ export class SearchComponent
         if(this.searchType)
         {
             this.searchTerm = formValue
-            console.log("sinfle",this.searchTerm)
         }
         else
         {
-            //waiting for the data
             this.searchTerm = formValue
         }
 
         this.searchsubmitted = true
-        //this.searchTerm = ""
+
         
     }
 

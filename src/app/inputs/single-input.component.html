@@ -1,16 +1,16 @@
 
-<div id="{{elementId}}" class="container" tabindex="-1" *ngIf="batchInputsubmitted" style="background-color: white">
+<div id="{{elementId}}" class="container" tabindex="-1" *ngIf="batchInputsubmitted" style=" padding: 20px; margin-left: 4px" >
   <form id="resutltForm" [formGroup]="selectedSessionForm" (ngSubmit)="saveSession(selectedSessionForm.value)"  >
-  <div class="container">
+  <div class="container"style="margin-top: 20px; width: 100%;background-color: white;">
     <div class="row" style="color: white; background-color: gray ">
       <div class="col">
           <h6>Select</h6>
       </div>
       <div class="col">
-        <h6>SKU</h6>
+        <h6>transaction Type Code</h6>
       </div>
       <div class="col">
-        <h6>Transaction Type Code</h6>
+        <h6>description</h6>
       </div>
       <div class="col">
         <h6>Percentage</h6>
@@ -24,13 +24,13 @@
         </div>
       </div>
       <div class="col" >
-        <h6 name="SKU" id="SKU" >{{session.SKU}}</h6>
+        <h6 name="SKU" id="SKU" >{{session.transactionTypeCode}}</h6>
       </div>
       <div class="col">
-        <h6 >{{session.transactionYtpeCode}}</h6>
+        <h6 >{{session.description}}</h6>
       </div>
       <div class="col">
-        <h6 >{{session.Percentage}}%</h6>
+        <h6 >{{session.percentMatch*10}}%</h6>
       </div>
     </div>
 

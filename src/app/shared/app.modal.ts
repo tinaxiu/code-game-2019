@@ -6,10 +6,7 @@ export interface IData {
 
 export interface ISession
 {
-    id: number
-    SKU: number
-    Percentage: number
-    transactionYtpeCode: string //TYPE
-    isSelected:boolean
-
+    transactionTypeCode: string //TYPE
+    description:string
+    percentMatch: number
 }
