@@ -33,9 +33,6 @@ export class SingleInputComponent{
 
     constructor(private appService: AppService)
     {
-        appService.getResults(this.searchTerms).subscribe((data: any) => this.joggingData = data);
-        this.searchTerms = ""
-        this.batchInputsubmitted = true 
     }  
 
     ngOnInit(){
@@ -43,14 +40,21 @@ export class SingleInputComponent{
         
         this.selectedSessionForm = new FormGroup({
             s: this.s
-        })
-            
-        this.searchTerms = ""
-        this.batchInputsubmitted = false 
-
+        })            
+        if(this.searchTerms)
+            this.onInitialSeach()
+        else
+            this.batchInputsubmitted = false 
     }
 
     onInitialSeach()
+    {
+        this.appService.searchSessions(this.searchTerms).subscribe((data: any) => this.foundSessions = data);           
+
+        this.batchInputsubmitted = true 
+    }
+
+    onInitialSeach2()
     {
         this.appService.getResults(this.searchTerms).subscribe((data: any) => this.joggingData = data);           
         this.searchTerms = ""
@@ -73,7 +77,10 @@ export class SingleInputComponent{
         else
             console.log(this.foundSessions[0].SKU)
             this.batchInputsubmitted = false
-    }
+        
+        this.selectedSessionForm.reset()
+        this.ngOnInit()
+        }
 
 
 }

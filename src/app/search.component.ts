@@ -42,7 +42,7 @@ export class SearchComponent
 {
 
     searchType: boolean
-    public searchTerm: string = "s"
+    searchTerm: string = "s"
 
     searchsubmitted: boolean
 
@@ -77,10 +77,10 @@ export class SearchComponent
     
 
     suggestSubmit(formValue){
-        console.log(formValue)
         if(this.searchType)
         {
             this.searchTerm = formValue
+            console.log("sinfle",this.searchTerm)
         }
         else
         {
@@ -89,7 +89,7 @@ export class SearchComponent
         }
 
         this.searchsubmitted = true
-
+        //this.searchTerm = ""
         
     }
 
