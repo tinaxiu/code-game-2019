@@ -15,6 +15,9 @@ import { EventListResolver } from './inputs/data-items-resolver.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchComponent } from "./search.component";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpErrorHandler } from './shared/error-handler.service';
+import { MessageService } from './shared/message.service';
 
 
 @NgModule({
@@ -32,11 +35,14 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule,
+    
   ],
   providers: [
     AppService,
-    EventListResolver
+    EventListResolver,
+    HttpErrorHandler,MessageService
     
   ],
   bootstrap: [AppComponent]

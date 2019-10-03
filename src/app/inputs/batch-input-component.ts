@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
 import { AppService } from '../shared/app.service';
 import { ISession, IData} from '../shared/app.modal';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -21,9 +21,11 @@ export class BatchInputComponent {
     foundData: ISession[]
     selectedSession: ISession
     batchInputsubmitted: boolean = false
-    searchTerms : string = "s,d"
+    //searchTerms : string = "s,d"
     submittedDataItems: ISession[] = []
 
+    @Input() searchTerms:string
+    
     constructor(private appService: AppService)
     {
 

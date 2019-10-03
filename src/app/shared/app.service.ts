@@ -1,9 +1,40 @@
 import { Injectable, EventEmitter } from "@angular/core";
 import { Subject, Observable } from 'rxjs';
 import { IData, ISession} from './app.modal';
-import { Session } from 'protractor';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpErrorHandler, HandleError } from './error-handler.service';
+import { catchError } from 'rxjs/operators';
 @Injectable()
 export class AppService {
+
+  apiURL = 'localhost:31326/api/calcscore/';
+
+  searchTerms: string[]
+  private handleError: HandleError;
+  private headers: HttpHeaders;
+
+  constructor(private http: HttpClient) {
+    
+    this.headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
+    
+  }
+
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'text/html'
+    })
+  }  
+
+  getResults(searchTerm: string) {
+    return this.http.get("localhost:31326/api/calcscore/brown dog/red fox,hello world", {headers: this.headers});
+  }
+
+  putResult(searchTerm): Observable<ISession> {
+    return this.http.put<ISession>(this.apiURL,searchTerm, this.httpOptions)
+    .pipe(
+    )
+  }
 
   getEvents():Observable<IData[]>
   {
@@ -12,23 +43,6 @@ export class AppService {
     setTimeout(() => {subject.next(DATA); subject.complete(); },
     100)
     return subject
-  }
-
-  getEvent(id:number):IData{
-    return DATA.find(event => event.id === id)
-  }
-
-  saveEvent(event)
-  {
-    event.id = 999
-    event.session = []
-    DATA.push(event)
-  }
-
-  updateEvent(event)
-  {
-    let index = DATA.findIndex(x => x.id = event.id)
-    DATA[index] = event
   }
 
   searchSessions(searchTerm: string)

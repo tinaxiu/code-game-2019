@@ -26,12 +26,16 @@ export class SingleInputComponent{
     s: FormControl;
 
     batchInputsubmitted: boolean = false
+    public currentJogging: any;
+    public joggingData: Array<any>;
 
     @Input() searchTerms:string
 
     constructor(private appService: AppService)
     {
-
+        appService.getResults(this.searchTerms).subscribe((data: any) => this.joggingData = data);
+        this.searchTerms = ""
+        this.batchInputsubmitted = true 
     }  
 
     ngOnInit(){
@@ -40,24 +44,15 @@ export class SingleInputComponent{
         this.selectedSessionForm = new FormGroup({
             s: this.s
         })
-
-        console.log("load")
-        this.appService.searchSessions(this.searchTerms).subscribe(
-            sessions => this.foundSessions = sessions
-        )
             
         this.searchTerms = ""
-        this.batchInputsubmitted = true 
+        this.batchInputsubmitted = false 
 
     }
 
     onInitialSeach()
     {
-        console.log("load")
-        this.appService.searchSessions(this.searchTerms).subscribe(
-            sessions => this.foundSessions = sessions
-        )
-            
+        this.appService.getResults(this.searchTerms).subscribe((data: any) => this.joggingData = data);           
         this.searchTerms = ""
         this.batchInputsubmitted = true 
     }

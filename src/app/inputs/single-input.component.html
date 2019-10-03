@@ -1,6 +1,6 @@
-<div class="container" tabindex="-1" *ngIf="batchInputsubmitted">
-  <button type="button" (click)="onInitialSeach()">Refresh</button>
-  <form id="resutltForm" [formGroup]="selectedSessionForm" (ngSubmit)="saveSession(selectedSessionForm.value)"  >
+
+<div class="container" tabindex="-1" >
+  <form id="resutltForm" [formGroup]="selectedSessionForm" (ngSubmit)="saveSession(selectedSessionForm.value)" *ngIf="batchInputsubmitted" >
   <div class="container">
     <div class="row" style="color: white; background-color: gray ">
       <div class="col">
