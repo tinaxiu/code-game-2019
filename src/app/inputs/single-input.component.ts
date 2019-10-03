@@ -3,6 +3,7 @@ import { FormGroup, NgForm, FormControl, FormBuilder } from '@angular/forms'
 import { AppService } from '../shared/app.service';
 import { ISession} from '../shared/app.modal';
 import { SearchComponent } from "../search.component";
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'single-input',
@@ -29,7 +30,7 @@ export class SingleInputComponent{
 
     @Input() searchTerms:string
 
-    constructor(private appService: AppService)
+    constructor(private appService: AppService, private router: Router)
     {
         this.search()
     }  
@@ -63,6 +64,7 @@ export class SingleInputComponent{
     {
         this.batchInputsubmitted = false 
         this.searchTerms = ""
+        this.router.navigate(['home'])
     }
 
 
