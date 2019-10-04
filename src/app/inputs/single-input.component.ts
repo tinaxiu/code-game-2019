@@ -64,7 +64,7 @@ export class SingleInputComponent{
     {
         this.batchInputsubmitted = false 
         this.searchTerms = ""
-        this.router.navigate(['home'])
+        this.router.navigate(['/'])
     }
 
 

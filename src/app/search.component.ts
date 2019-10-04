@@ -44,7 +44,7 @@ export class SearchComponent
 
     searchType: boolean
     searchTerm: string = "s"
-    searchName: string = "single input"
+    searchName: string = "Select Input Type"
     searchsubmitted: boolean
 
     singleSearchResults: ISession[] = []
@@ -54,7 +54,7 @@ export class SearchComponent
     ngOnInit(): void {
         //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
         //Add 'implements OnInit' to the class.
-        this.searchType = true
+        this.searchType = undefined
         this.searchsubmitted = false
     }
 
@@ -66,10 +66,14 @@ export class SearchComponent
     
     getName(str: string)
     {
+        this.searchTerm = ""
+        this.router.navigate(['/'])
+
         if(str === "single")
         {
             this.searchName = "Single Input"
             this.searchType = true
+            
         }
             
 
@@ -91,8 +95,7 @@ export class SearchComponent
             this.searchTerm = formValue
             this.appService.searchTerms = formValue
             this.router.navigate(['/singleInput'])
-            
-            
+                        
         }
         else
         {
